@@ -42,22 +42,12 @@ Order.prototype.removePizza = function(pizza) {
   this.pizzas.splice(index, 1);
 }
 
-var addJQueryTopping = function() {
-  $(this).click(function() {
-    var toppingArray = $(this).html().split(">");
-    var topping = toppingArray[toppingArray.length - 1];
-    pizza.addTopping(topping);
-    $("#displayPizza .toppings").append('<div>' + topping + ' <span class="remove ' + topping.replace(" ", "_") + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></div>')
-    $("#pizzaCost span").text("$" + pizza.cost());
-    $(this).unbind("click");
-  })
-}
-
 $(document).ready(function() {
   var order = new Order();
   var pizza;
   var size;
   var quantity;
+  var count = "odd";
   $("#pizzaCreation .size").click(function() {
     size = $(this).attr("class").split(" ")[1];
     pizza = new Pizza(size);
@@ -100,16 +90,31 @@ $(document).ready(function() {
         toppingDisplay += "<li class='list-group-item'>" + t + "</li>"
       })
     }
-    toppingDisplay += "</ul>"
-    $("#orderDisplay .order-container").append('<div class="pizza"><strong>' + pizza.quantity + ' ' +
-                                               pizza.size.toUpperCase() + ' PIZZA' + plural + '</strong><br>' +
-                                               toppingDisplay + '$' + pizza.cost() + '</div>')
+    toppingDisplay += "</ul>";
+    var pizzaIndex = order.pizzas.indexOf(pizza);
+    $("#orderDisplay .order-container")
+      .append('<span class="remove ' + pizzaIndex +
+      '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span><div class="pizza ' + count +
+      '"><strong>' + pizza.quantity + ' ' +
+      pizza.size.toUpperCase() + ' PIZZA' + plural + '</strong> - $' + pizza.cost() + '<br>' +
+      toppingDisplay + '</div>')
+    if (count === "odd") {
+      count = "even";
+    } else {
+      count = "odd";
+    }
     $(".order-total").empty().append("<strong>Total:</strong> $" + order.cost().toFixed(2));
     $("#pizzaCreation").show();
     $("#pizzaCreation .choose-size h3").text("Add Another Pizza?");
     $(".topping").each(function() {
       $(this).show();
     })
+  })
 
+  $("form#placeOrder").submit(function(event) {
+    event.preventDefault();
+    $(".confirmation").append('<h3>Thank you for placing your order.  Unfortunately this is just a code review so you won\'t get any pizza. The good news is you didn\'t pay any money! If you\'d like to buy a pizza, send $50 to me and I\'ll get you a pizza.</h3><p><a href="?">Place another order</a></p>')
+    $("#fullDisplay").fadeOut(1000);
+    $(".confirmation").delay(1000).fadeIn(1000);
   })
 })
