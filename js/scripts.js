@@ -41,3 +41,16 @@ Order.prototype.removePizza = function(pizza) {
   var index = this.pizzas.indexOf(pizza);
   this.pizzas.splice(index, 1);
 }
+
+$(document).ready(function() {
+  var order = new Order();
+  $("#pizzaCreation .size").click(function() {
+    var size = $(this).attr("class").split(" ")[1];
+    var pizza = new Pizza(size);
+    $("#pizzaCreation").removeClass("col-sm-12");
+    $("#pizzaCreation").addClass("col-sm-10");
+    $("#pizzaCreation .choose-size").hide();
+    $("#pizzaCreation .create-pizza").show();
+    $("#orderDisplay").show();
+  })
+})

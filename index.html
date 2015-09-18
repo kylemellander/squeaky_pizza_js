@@ -12,23 +12,74 @@
     <div class="container">
       <h1 class="page-header">Squeaky Pizza</h1>
       <div class="row">
-        <div class="col-xs-10" id="pizzaCreation">
+        <div class="col-xs-12" id="pizzaCreation">
           <div class="choose-size">
             <h3>Choose your size:</h3>
             <div class="row">
-              <div class="col-xs-4">
-                <a class="medium">Medium (12")</a>
+              <div class="col-sm-4">
+                <a class="size medium">
+                  <img src="img/pizza.svg">
+                  <p>Medium (12")</p>
+                </a>
               </div>
-              <div class="col-xs-4">
-                <a class="large">Large (14")</a>
+              <div class="col-sm-4">
+                <a class="size large">
+                  <img src="img/pizza.svg">
+                  <p>Large (14")</p>
+                </a>
               </div>
-              <div class="col-xs-4">
-                <a class="family">Family (16")</a>
+              <div class="col-sm-4">
+                <a class="size family">
+                  <img src="img/pizza.svg">
+                  <p>Family (16")</p>
+                </a>
               </div>
             </div>
           </div>
           <div class="create-pizza">
-
+            <h3>Create Your Pizza</h3>
+            <div class="row">
+              <div class="col-xs-9 add-toppings">
+                <h4>Click on a topping to add it your pizza</h4>
+                <div class="row">
+                  <div class="col-sm-4"><div class="topping"><img src="img/pepperoni.svg"><br>Pepperoni</div></div>
+                  <div class="col-sm-4"><div class="topping"><img src="img/sausage.svg"><br>Sausage</div></div>
+                  <div class="col-sm-4"><div class="topping"><img src="img/ham.svg"><br>Canadian Bacon</div></div>
+                  <div class="col-sm-4"><div class="topping"><img src="img/onion.svg"><br>Onions</div></div>
+                  <div class="col-sm-4"><div class="topping"><img src="img/tomato.svg"><br>Tomatoes</div></div>
+                  <div class="col-sm-4"><div class="topping"><img src="img/olives.svg"><br>Olives</div></div>
+                  <div class="col-sm-4"><div class="topping"><img src="img/pineapple.svg"><br>Pineapple</div></div>
+                  <div class="col-sm-4"><div class="topping"><img src="img/mushroom.svg"><br>Mushrooms</div></div>
+                  <div class="col-sm-4"><div class="topping"><img src="img/pepper.svg"><br>Green Peppers</div></div>
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <div class="display-pizza">
+                  <h4>Your Pizza</h4>
+                  <div class="size"></div>
+                  <div class="toppings"></div>
+                </div>
+                <form class="form">
+                  <div class="form-group">
+                    <label for="quantity">How many?</label>
+                    <select class="form-control" id="quantity">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                  <div id="pizzaCost"></div>
+                  <button type="submit" class="btn btn-primary">Add Pizza</button>
+                </form>
+              </div>
+            </div>
           </div>
           <div class="confirmation">
 
@@ -36,7 +87,7 @@
 
         </div>
         <div class="col-xs-2" id="orderDisplay">
-
+          <h3>Your Order</h3>
 
 
         </div>

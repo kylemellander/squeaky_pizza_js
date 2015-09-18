@@ -1,6 +1,31 @@
-#pizzaCreation a {
+#pizzaCreation a, .topping {
   cursor:pointer;
 }
-.choose-size {
+#pizzaCreation .create-pizza, #pizzaCreation .confirmation, #orderDisplay {
+  display:none;
+}
+select#quantity {
+  width:100px;
+}
+.create-pizza .checkbox {
+  margin-left:40px;
+}
+.topping img, .medium img {
+  width:120px;
+  height:auto;
+}
+.topping {
+  margin-top:5px;
+  margin-bottom:5px;
+}
+.large img {
+  width:140px;
+  height:auto;
+}
+.family img {
+  width:160px;
+  height:auto;
+}
+.choose-size, .add-toppings {
   text-align: center;
 }
