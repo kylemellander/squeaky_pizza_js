@@ -61,5 +61,4 @@ describe("Order", function() {
     testOrder.addPizza(testPizza);
     expect(testOrder.cost()).to.equal(9.99);
   })
-
 })
