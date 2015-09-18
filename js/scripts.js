@@ -2,6 +2,7 @@ function Pizza(size) {
   this.size = size;
   this.toppings = [];
   this.quantity = 1;
+  this.index = -1;
 }
 
 Pizza.prototype.addTopping = function(topping) {
@@ -42,9 +43,20 @@ Order.prototype.cost = function() {
   return cost;
 }
 
+Order.prototype.findPizza = function(index) {
+  var pizza;
+  this.pizzas.forEach(function(p) {
+    if (p.index === index) {
+      pizza = p;
+    }
+  })
+  return pizza;
+}
+
 Order.prototype.removePizza = function(pizza) {
-  var index = this.pizzas.indexOf(pizza);
-  this.pizzas.splice(index, 1);
+  if (pizza.index >= 0) {
+    this.pizzas.splice(pizza.index, 1);
+  }
 }
 
 $(document).ready(function() {
@@ -75,45 +87,92 @@ $(document).ready(function() {
       $("#displayPizza .toppings").append('<div>' + topping + ' <span class="remove ' + topping.replace(" ", "_") + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></div>')
       $("#pizzaCost span").text("$" + pizza.cost().toFixed(2));
       $(this).hide();
+      $("#displayPizza .remove").each(function() {
+        $(this).click(function() {
+          var topping = $(this).attr("class").split(" ")[1].replace("_", " ");
+          pizza.removeTopping(topping);
+          $(".topping:contains('" + topping + "')").show();
+          $("#pizzaCost span").text("$" + pizza.cost().toFixed(2));
+          $(this).parent().remove();
+        })
+      })
     })
   })
+
 
   $(".create-pizza form").submit(function(event) {
     event.preventDefault();
     quantity = parseInt($(".create-pizza select#quantity").val());
     pizza.quantity = quantity;
+    if (order.pizzas.length > 0) {
+      pizza.index = order.pizzas[order.pizzas.length - 1].index + 1;
+    } else {
+      pizza.index = 0;
+    }
     order.addPizza(pizza);
     $(".create-pizza").hide();
     $("#displayPizza .toppings").empty();
-    var plural = "";
-    if (pizza.quantity > 1) {plural = "S"};
-    var toppingDisplay = "<ul class='list-group'>"
-    if (pizza.toppings.length === 0) {
-      toppingDisplay += "<li class='list-group-item'>No Toppings</li>"
-    } else {
-      pizza.toppings.forEach(function(t) {
-        toppingDisplay += "<li class='list-group-item'>" + t + "</li>"
-      })
-    }
-    toppingDisplay += "</ul>";
-    var pizzaIndex = order.pizzas.indexOf(pizza);
-    $("#orderDisplay .order-container")
-      .append('<span class="remove ' + pizzaIndex +
-      '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span><div class="pizza ' + count +
-      '"><strong>' + pizza.quantity + ' ' +
-      pizza.size.toUpperCase() + ' PIZZA' + plural + '</strong> - $' + pizza.cost() + '<br>' +
-      toppingDisplay + '</div>')
-    if (count === "odd") {
-      count = "even";
-    } else {
-      count = "odd";
-    }
-    $(".order-total").empty().append("<strong>Total:</strong> $" + order.cost().toFixed(2));
+    $("#orderDisplay .order-container").empty();
+    order.pizzas.forEach(function(p) {
+      var toppingDisplay = "<ul class='list-group'>"
+      if (p.toppings.length === 0) {
+        toppingDisplay += "<li class='list-group-item'>No Toppings</li>"
+      } else {
+        p.toppings.forEach(function(t) {
+          toppingDisplay += "<li class='list-group-item'>" + t + "</li>"
+        })
+      }
+      toppingDisplay += "</ul>";
+      var plural = "";
+      if (p.quantity > 1) {plural = "S"};
+      $("#orderDisplay .order-container")
+        .append('<div class="pizza ' + count + '"><span class="remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span><strong>' +
+        p.quantity + ' ' + p.size.toUpperCase() + ' PIZZA' + plural +
+        '</strong> - $' + p.cost() + '<br>' + toppingDisplay + '</div>')
+      if (count === "odd") {
+        count = "even";
+      } else {
+        count = "odd";
+      }
+    })
     $("#pizzaCreation").show();
     $("#pizzaCreation .choose-size h3").text("Add Another Pizza?");
     $(".topping").each(function() {
       $(this).show();
     })
+    $(".order-container .remove").each(function() {
+      $(this).click(function() {
+        var pizzaIndex = $(".order-container .remove").index(this);
+        if (order.findPizza(pizzaIndex) !== undefined) {
+          order.removePizza(order.findPizza(pizzaIndex));
+          $("#orderDisplay .order-container").empty();
+          order.pizzas.forEach(function(p) {
+            var toppingDisplay = "<ul class='list-group'>"
+            if (p.toppings.length === 0) {
+              toppingDisplay += "<li class='list-group-item'>No Toppings</li>"
+            } else {
+              p.toppings.forEach(function(t) {
+                toppingDisplay += "<li class='list-group-item'>" + t + "</li>"
+              })
+            }
+            toppingDisplay += "</ul>";
+            var plural = "";
+            if (p.quantity > 1) {plural = "S"};
+            $("#orderDisplay .order-container")
+              .append('<div class="pizza ' + count + '"><span class="remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span><strong>' +
+              p.quantity + ' ' + p.size.toUpperCase() + ' PIZZA' + plural +
+              '</strong> - $' + p.cost() + '<br>' + toppingDisplay + '</div>')
+            if (count === "odd") {
+              count = "even";
+            } else {
+              count = "odd";
+            }
+          })
+          $(".order-total").empty().append("<strong>Total:</strong> $" + order.cost().toFixed(2));
+        }
+      })
+    })
+    $(".order-total").empty().append("<strong>Total:</strong> $" + order.cost().toFixed(2));
   })
 
   $("form#placeOrder").submit(function(event) {
