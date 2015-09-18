@@ -10,3 +10,10 @@ describe("Pizza", function() {
     expect(testPizza.toppings).to.eql(["Pepperoni"]);
   })
 })
+
+describe("Order", function() {
+  it("creates an empty order", function() {
+    var testOrder = new Order();
+    expect(testOrder.pizzas).to.eql([]);
+  })
+})
