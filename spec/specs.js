@@ -62,12 +62,4 @@ describe("Order", function() {
     expect(testOrder.cost()).to.equal(9.99);
   })
 
-  it("removes a pizza from an order", function() {
-    var testPizza = new Pizza("large");
-    testPizza.setQuantity(1);
-    var testOrder = new Order();
-    testOrder.addPizza(testPizza);
-    testOrder.removePizza(testPizza);
-    expect(testOrder.pizzas).to.eql([]);
-  })
 })

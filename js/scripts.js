@@ -2,7 +2,6 @@ function Pizza(size) {
   this.size = size;
   this.toppings = [];
   this.quantity = 1;
-  this.index = -1;
 }
 
 Pizza.prototype.addTopping = function(topping) {
@@ -43,21 +42,6 @@ Order.prototype.cost = function() {
   return cost;
 }
 
-Order.prototype.findPizza = function(index) {
-  var pizza;
-  this.pizzas.forEach(function(p) {
-    if (p.index === index) {
-      pizza = p;
-    }
-  })
-  return pizza;
-}
-
-Order.prototype.removePizza = function(pizza) {
-  if (pizza.index >= 0) {
-    this.pizzas.splice(pizza.index, 1);
-  }
-}
 
 $(document).ready(function() {
   var order = new Order();
@@ -104,73 +88,34 @@ $(document).ready(function() {
     event.preventDefault();
     quantity = parseInt($(".create-pizza select#quantity").val());
     pizza.quantity = quantity;
-    if (order.pizzas.length > 0) {
-      pizza.index = order.pizzas[order.pizzas.length - 1].index + 1;
-    } else {
-      pizza.index = 0;
-    }
     order.addPizza(pizza);
     $(".create-pizza").hide();
     $("#displayPizza .toppings").empty();
-    $("#orderDisplay .order-container").empty();
-    order.pizzas.forEach(function(p) {
-      var toppingDisplay = "<ul class='list-group'>"
-      if (p.toppings.length === 0) {
-        toppingDisplay += "<li class='list-group-item'>No Toppings</li>"
-      } else {
-        p.toppings.forEach(function(t) {
-          toppingDisplay += "<li class='list-group-item'>" + t + "</li>"
-        })
-      }
-      toppingDisplay += "</ul>";
-      var plural = "";
-      if (p.quantity > 1) {plural = "S"};
-      $("#orderDisplay .order-container")
-        .append('<div class="pizza ' + count + '"><span class="remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span><strong>' +
-        p.quantity + ' ' + p.size.toUpperCase() + ' PIZZA' + plural +
-        '</strong> - $' + p.cost() + '<br>' + toppingDisplay + '</div>')
-      if (count === "odd") {
-        count = "even";
-      } else {
-        count = "odd";
-      }
-    })
+
+    var toppingDisplay = "<ul class='list-group'>"
+    if (pizza.toppings.length === 0) {
+      toppingDisplay += "<li class='list-group-item'>No Toppings</li>"
+    } else {
+      pizza.toppings.forEach(function(t) {
+        toppingDisplay += "<li class='list-group-item'>" + t + "</li>"
+      })
+    }
+    toppingDisplay += "</ul>";
+    var plural = "";
+    if (pizza.quantity > 1) {plural = "S"};
+    $("#orderDisplay .order-container")
+      .append('<div class="pizza ' + count + '"><strong>' +
+      pizza.quantity + ' ' + pizza.size.toUpperCase() + ' PIZZA' + plural +
+      '</strong> - $' + pizza.cost() + '<br>' + toppingDisplay + '</div>')
+    if (count === "odd") {
+      count = "even";
+    } else {
+      count = "odd";
+    }
     $("#pizzaCreation").show();
     $("#pizzaCreation .choose-size h3").text("Add Another Pizza?");
     $(".topping").each(function() {
       $(this).show();
-    })
-    $(".order-container .remove").each(function() {
-      $(this).click(function() {
-        var pizzaIndex = $(".order-container .remove").index(this);
-        if (order.findPizza(pizzaIndex) !== undefined) {
-          order.removePizza(order.findPizza(pizzaIndex));
-          $("#orderDisplay .order-container").empty();
-          order.pizzas.forEach(function(p) {
-            var toppingDisplay = "<ul class='list-group'>"
-            if (p.toppings.length === 0) {
-              toppingDisplay += "<li class='list-group-item'>No Toppings</li>"
-            } else {
-              p.toppings.forEach(function(t) {
-                toppingDisplay += "<li class='list-group-item'>" + t + "</li>"
-              })
-            }
-            toppingDisplay += "</ul>";
-            var plural = "";
-            if (p.quantity > 1) {plural = "S"};
-            $("#orderDisplay .order-container")
-              .append('<div class="pizza ' + count + '"><span class="remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span><strong>' +
-              p.quantity + ' ' + p.size.toUpperCase() + ' PIZZA' + plural +
-              '</strong> - $' + p.cost() + '<br>' + toppingDisplay + '</div>')
-            if (count === "odd") {
-              count = "even";
-            } else {
-              count = "odd";
-            }
-          })
-          $(".order-total").empty().append("<strong>Total:</strong> $" + order.cost().toFixed(2));
-        }
-      })
     })
     $(".order-total").empty().append("<strong>Total:</strong> $" + order.cost().toFixed(2));
   })
