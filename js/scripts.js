@@ -59,9 +59,12 @@ $(document).ready(function() {
     $("#orderDisplay").show();
     $("#displayPizza .size span").text(pizza.size);
     $("#pizzaCost span").text("$" + pizza.cost().toFixed(2));
-
-
   })
+
+  $("#quantity").change(function() {
+    pizza.quantity = parseInt($("#quantity").val());
+    $("#pizzaCost span").text("$" + pizza.cost().toFixed(2));
+   })
 
   $(".topping").each(function() {
     $(this).click(function() {
