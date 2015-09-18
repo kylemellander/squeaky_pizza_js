@@ -36,4 +36,12 @@ describe("Order", function() {
     testOrder.addPizza(testPizza);
     expect(testOrder.pizzas).to.eql([testPizza])
   })
+
+  it("calculates the cost of an order", function() {
+    var testPizza = new Pizza("large");
+    testPizza.setQuantity(1);
+    var testOrder = new Order();
+    testOrder.addPizza(testPizza);
+    expect(testOrder.cost()).to.equal(9.99);
+  })
 })

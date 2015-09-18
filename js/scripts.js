@@ -28,3 +28,11 @@ function Order() {
 Order.prototype.addPizza = function(pizza) {
   this.pizzas.push(pizza);
 }
+
+Order.prototype.cost = function() {
+  var cost = 0.00;
+  this.pizzas.forEach(function(pizza) {
+    cost += pizza.cost();
+  })
+  return cost;
+}
