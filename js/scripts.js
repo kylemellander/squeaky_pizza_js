@@ -1,7 +1,7 @@
 function Pizza(size) {
   this.size = size;
   this.toppings = [];
-  this.quantity = 0;
+  this.quantity = 1;
 }
 
 Pizza.prototype.addTopping = function(topping) {
@@ -35,4 +35,9 @@ Order.prototype.cost = function() {
     cost += pizza.cost();
   })
   return cost;
+}
+
+Order.prototype.removePizza = function(pizza) {
+  var index = this.pizzas.indexOf(pizza);
+  this.pizzas.splice(index, 1);
 }

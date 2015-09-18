@@ -12,14 +12,14 @@ describe("Pizza", function() {
 
   it("adds a quantity to a pizza", function() {
     var testPizza = new Pizza("large");
-    testPizza.setQuantity(1);
-    expect(testPizza.quantity).to.equal(1);
+    testPizza.setQuantity(5);
+    expect(testPizza.quantity).to.equal(5);
   })
 
   it("calculates the cost of a pizza", function() {
     var testPizza = new Pizza("large");
-    testPizza.setQuantity(1);
-    expect(testPizza.cost()).to.equal(9.99);
+    testPizza.setQuantity(2);
+    expect(testPizza.cost()).to.equal(19.98);
   })
 })
 
@@ -43,5 +43,14 @@ describe("Order", function() {
     var testOrder = new Order();
     testOrder.addPizza(testPizza);
     expect(testOrder.cost()).to.equal(9.99);
+  })
+
+  it("removes a pizza from an order", function() {
+    var testPizza = new Pizza("large");
+    testPizza.setQuantity(1);
+    var testOrder = new Order();
+    testOrder.addPizza(testPizza);
+    testOrder.removePizza(testPizza);
+    expect(testOrder.pizzas).to.eql([]);
   })
 })
