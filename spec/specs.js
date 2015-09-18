@@ -9,6 +9,12 @@ describe("Pizza", function() {
     testPizza.addTopping("Pepperoni");
     expect(testPizza.toppings).to.eql(["Pepperoni"]);
   })
+
+  it("adds a quantity to a pizza", function() {
+    var testPizza = new Pizza("large");
+    testPizza.setQuantity(1);
+    expect(testPizza.quantity).to.equal(1);
+  })
 })
 
 describe("Order", function() {
