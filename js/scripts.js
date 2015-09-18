@@ -52,5 +52,9 @@ $(document).ready(function() {
     $("#pizzaCreation .choose-size").hide();
     $("#pizzaCreation .create-pizza").show();
     $("#orderDisplay").show();
+    $("#displayPizza .size span").text(pizza.size);
+    $("#pizzaCost span").text("$" + pizza.cost());
+
+    
   })
 })

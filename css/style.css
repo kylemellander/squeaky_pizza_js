@@ -26,6 +26,15 @@ select#quantity {
   width:160px;
   height:auto;
 }
+.text-center {
+  margin:0 auto;
+}
 .choose-size, .add-toppings {
   text-align: center;
+}
+.size, #pizzaCost {
+  font-weight: bold;
+}
+.size span, #pizzaCost span {
+  font-weight: normal;
 }
