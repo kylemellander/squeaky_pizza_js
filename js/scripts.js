@@ -1,6 +1,7 @@
 function Pizza(size) {
   this.size = size;
   this.toppings = [];
+  this.quantity = 0;
 }
 
 Pizza.prototype.addTopping = function(topping) {
@@ -9,6 +10,15 @@ Pizza.prototype.addTopping = function(topping) {
 
 Pizza.prototype.setQuantity = function(i) {
   this.quantity = i;
+}
+
+Pizza.prototype.cost = function() {
+  var baseCosts = {"large": 9.99, "medium": 7.99, "family": 12.99};
+  var toppingCost = 0.99;
+  var toppingCount = this.toppings.length;
+  if (toppingCount >= 1) { toppingCount -= 1; };
+  var cost = (baseCosts[this.size] + (toppingCost * toppingCount)) * this.quantity;
+  return cost;
 }
 
 function Order() {

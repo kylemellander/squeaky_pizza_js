@@ -15,6 +15,12 @@ describe("Pizza", function() {
     testPizza.setQuantity(1);
     expect(testPizza.quantity).to.equal(1);
   })
+
+  it("calculates the cost of a pizza", function() {
+    var testPizza = new Pizza("large");
+    testPizza.setQuantity(1);
+    expect(testPizza.cost()).to.equal(9.99);
+  })
 })
 
 describe("Order", function() {
