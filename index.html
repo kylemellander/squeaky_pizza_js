@@ -36,61 +36,58 @@
               </div>
             </div>
           </div>
-          <div class="create-pizza">
+        </div>
+        <div class="create-pizza">
+          <div class="col-xs-3">
+            <div id="displayPizza">
+              <h3>Your Pizza</h3>
+              <div class="size">Size: <span></span></div>
+              <div class="toppings"><strong>Ingredients</strong></div>
+            </div>
+            <form class="form">
+              <div class="form-group">
+                <label for="quantity">How many?</label>
+                <select class="form-control" id="quantity">
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+              <div id="pizzaCost">Cost <span></span></div>
+              <button type="submit" class="btn btn-primary">Add Pizza</button>
+            </form>
+          </div>
+          <div class="col-xs-6 add-toppings">
+            <h3 class="text-center page-header">Customize your pizza</h3>
+            <h4>Click on a topping to add it your pizza</h4>
             <div class="row">
-              <div class="col-xs-2">
-                <div id="displayPizza">
-                  <h4>Your Pizza</h4>
-                  <div class="size">Size: <span></span></div>
-                  <div class="toppings"></div>
-                </div>
-                <form class="form">
-                  <div class="form-group">
-                    <label for="quantity">How many?</label>
-                    <select class="form-control" id="quantity">
-                      <option value="1" selected>1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                    </select>
-                  </div>
-                  <div id="pizzaCost">Cost <span></span></div>
-                  <button type="submit" class="btn btn-primary">Add Pizza</button>
-                </form>
-              </div>
-              <div class="col-xs-10 add-toppings">
-                <h2 class="text-center">Create Your Pizza</h2>
-                <h4>Click on a topping to add it your pizza</h4>
-                <div class="row">
-                  <div class="col-sm-4"><div class="topping"><img src="img/pepperoni.svg"><br>Pepperoni</div></div>
-                  <div class="col-sm-4"><div class="topping"><img src="img/sausage.svg"><br>Sausage</div></div>
-                  <div class="col-sm-4"><div class="topping"><img src="img/ham.svg"><br>Canadian Bacon</div></div>
-                  <div class="col-sm-4"><div class="topping"><img src="img/onion.svg"><br>Onions</div></div>
-                  <div class="col-sm-4"><div class="topping"><img src="img/tomato.svg"><br>Tomatoes</div></div>
-                  <div class="col-sm-4"><div class="topping"><img src="img/olives.svg"><br>Olives</div></div>
-                  <div class="col-sm-4"><div class="topping"><img src="img/pineapple.svg"><br>Pineapple</div></div>
-                  <div class="col-sm-4"><div class="topping"><img src="img/mushroom.svg"><br>Mushrooms</div></div>
-                  <div class="col-sm-4"><div class="topping"><img src="img/pepper.svg"><br>Green Peppers</div></div>
-                </div>
-              </div>
+              <div class="col-sm-4"><div class="topping"><img src="img/pepperoni.svg"><br>Pepperoni</div></div>
+              <div class="col-sm-4"><div class="topping"><img src="img/sausage.svg"><br>Sausage</div></div>
+              <div class="col-sm-4"><div class="topping"><img src="img/ham.svg"><br>Canadian Bacon</div></div>
+              <div class="col-sm-4"><div class="topping"><img src="img/onion.svg"><br>Onions</div></div>
+              <div class="col-sm-4"><div class="topping"><img src="img/tomato.svg"><br>Tomatoes</div></div>
+              <div class="col-sm-4"><div class="topping"><img src="img/olives.svg"><br>Olives</div></div>
+              <div class="col-sm-4"><div class="topping"><img src="img/pineapple.svg"><br>Pineapple</div></div>
+              <div class="col-sm-4"><div class="topping"><img src="img/mushroom.svg"><br>Mushrooms</div></div>
+              <div class="col-sm-4"><div class="topping"><img src="img/pepper.svg"><br>Green Peppers</div></div>
             </div>
           </div>
-          <div class="confirmation">
+          <div class="col-xs-3" id="orderDisplay">
+            <h3>Your Order</h3>
+
 
           </div>
-
         </div>
-        <div class="col-xs-2" id="orderDisplay">
-          <h3>Your Order</h3>
+      </div>
+      <div class="confirmation">
 
-
-        </div>
       </div>
     </div>
   </body>

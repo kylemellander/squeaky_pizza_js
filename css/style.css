@@ -1,7 +1,7 @@
 #pizzaCreation a, .topping {
   cursor:pointer;
 }
-#pizzaCreation .create-pizza, #pizzaCreation .confirmation, #orderDisplay {
+.create-pizza, #pizzaCreation .confirmation, #orderDisplay {
   display:none;
 }
 select#quantity {
@@ -9,6 +9,9 @@ select#quantity {
 }
 .create-pizza .checkbox {
   margin-left:40px;
+}
+ #displayPizza .toppings div {
+  margin-left:20px;
 }
 .topping img, .medium img {
   width:120px;
@@ -37,4 +40,8 @@ select#quantity {
 }
 .size span, #pizzaCost span {
   font-weight: normal;
+}
+.remove span {
+  color:red;
+  cursor: pointer;
 }

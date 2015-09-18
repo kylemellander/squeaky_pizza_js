@@ -18,7 +18,7 @@ Pizza.prototype.cost = function() {
   var toppingCount = this.toppings.length;
   if (toppingCount >= 1) { toppingCount -= 1; };
   var cost = (baseCosts[this.size] + (toppingCost * toppingCount)) * this.quantity;
-  return cost;
+  return cost.toFixed(2);
 }
 
 function Order() {
@@ -50,11 +50,20 @@ $(document).ready(function() {
     $("#pizzaCreation").removeClass("col-sm-12");
     $("#pizzaCreation").addClass("col-sm-10");
     $("#pizzaCreation .choose-size").hide();
-    $("#pizzaCreation .create-pizza").show();
+    $(".create-pizza").show();
     $("#orderDisplay").show();
     $("#displayPizza .size span").text(pizza.size);
     $("#pizzaCost span").text("$" + pizza.cost());
 
-    
+    $(".topping").each(function() {
+      $(this).click(function() {
+        var toppingArray = $(this).html().split(">");
+        var topping = toppingArray[toppingArray.length - 1];
+        pizza.addTopping(topping);
+        $("#displayPizza .toppings").append('<div>' + topping + ' <span class="remove ' + topping.replace(" ", "_") + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></span></div>')
+        $("#pizzaCost span").text("$" + pizza.cost());
+        $(this).unbind("click");
+      })
+    })
   })
 })
