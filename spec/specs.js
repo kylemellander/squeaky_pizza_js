@@ -21,6 +21,15 @@ describe("Pizza", function() {
     testPizza.setQuantity(2);
     expect(testPizza.cost()).to.equal(19.98);
   })
+
+  it("calculates the cost of a 3-topping pizza", function() {
+    var testPizza = new Pizza("large");
+    testPizza.setQuantity(1);
+    testPizza.addTopping("Pepperoni");
+    testPizza.addTopping("Anchovies");
+    testPizza.addTopping("Onions");
+    expect(testPizza.cost()).to.equal(11.97);
+  })
 })
 
 describe("Order", function() {
