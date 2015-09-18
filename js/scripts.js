@@ -62,7 +62,7 @@ $(document).ready(function() {
   })
 
   $("#quantity").change(function() {
-    pizza.quantity = parseInt($("#quantity").val());
+    pizza.setQuantity(parseInt($("#quantity").val()));
     $("#pizzaCost span").text("$" + pizza.cost().toFixed(2));
    })
 
@@ -90,7 +90,7 @@ $(document).ready(function() {
   $(".create-pizza form").submit(function(event) {
     event.preventDefault();
     quantity = parseInt($(".create-pizza select#quantity").val());
-    pizza.quantity = quantity;
+    pizza.setQuantity(quantity);
     order.addPizza(pizza);
     $(".create-pizza").hide();
     $("#displayPizza .toppings").empty();
