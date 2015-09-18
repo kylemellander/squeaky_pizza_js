@@ -21,6 +21,11 @@ Pizza.prototype.cost = function() {
   return cost;
 }
 
+Pizza.prototype.removeTopping = function(topping) {
+  var index = this.toppings.indexOf(topping);
+  this.toppings.splice(index, 1);
+}
+
 function Order() {
   this.pizzas = [];
 }
