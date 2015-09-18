@@ -28,4 +28,12 @@ describe("Order", function() {
     var testOrder = new Order();
     expect(testOrder.pizzas).to.eql([]);
   })
+
+  it("adds a pizza to an order", function() {
+    var testPizza = new Pizza("large");
+    testPizza.setQuantity(1);
+    var testOrder = new Order();
+    testOrder.addPizza(testPizza);
+    expect(testOrder.pizzas).to.eql([testPizza])
+  })
 })
